@@ -14,7 +14,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
+        return view('component.kelas.index');
     }
 
     /**
