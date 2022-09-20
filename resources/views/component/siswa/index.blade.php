@@ -10,7 +10,7 @@
     <div class="card mt-2">
         <div class="card-body">
             <div class="card-title  ">
-                <a class="btn btn-sm float-end" href="#"><i class="fa fa-plus"></i></a>
+                <a class="btn btn-sm float-end" href="{{ route('siswa.create')}}"><i class="fa fa-plus"></i></a>
                 <h5>Data Siswa</h5>
             </div>
         </div>
@@ -32,20 +32,20 @@
         
         {{-- Data Siswa --}}
                 <tbody class="table-group-divide">
-                    {{-- @foreach () --}}
+                    @foreach ($siswa as $item)
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Lorem</td>
-                        <td>Jakarta</td>
-                        <td>Laki-laki</td>
-                        <td>XII RPL-1</td>
-                        <td>Bahasa Inggris</td>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->alamat }}</td>
+                        <td>{{ $item->jenis_kelamin }}</td>
+                        <td>{{ $item->kelas->nama_kelas }}</td>
+                        <td>{{ $item->mapel->mapel }}</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                            <a href="/siswa/edit/{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
                             <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

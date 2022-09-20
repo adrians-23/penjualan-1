@@ -14,7 +14,8 @@ class KelasController extends Controller
      */
     public function index()
     {
-        return view('component.kelas.index');
+        $kelas = Kelas::all();
+        return view('component.kelas.index', compact('kelas'));
     }
 
     /**
@@ -24,7 +25,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        return view('component.kelas.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'nama_kelas' => 'required',
+        ]);
+
+        $kelas = Kelas::create($request->all());
+
+        return redirect('kelas');
     }
 
     /**
@@ -55,9 +62,10 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kelas $kelas)
+    public function edit($id)
     {
-        //
+        $kelas = Kelas::find($id);
+        return view('component.kelas.edit', compact('kelas'));
     }
 
     /**
@@ -69,7 +77,15 @@ class KelasController extends Controller
      */
     public function update(Request $request, Kelas $kelas)
     {
-        //
+        $validate = $request->validate([
+            'nama_kelas' => 'required'
+        ]);
+
+        $kelas->update([
+            'nama_kelas' => $request->nama_kelas
+        ]);
+
+        return redirect('kelas');
     }
 
     /**
@@ -78,8 +94,11 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelas $kelas)
+    public function destroy($id)
     {
-        //
+        $kelas = Kelas::find($id);
+        $kelas->delete();
+
+        return redirect('kelas');
     }
 }

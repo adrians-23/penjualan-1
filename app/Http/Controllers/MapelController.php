@@ -14,7 +14,8 @@ class MapelController extends Controller
      */
     public function index()
     {
-        return view('component.mapel.index');
+        $mapel = Mapel::all();
+        return view('component.mapel.index', compact('mapel'));
     }
 
     /**
@@ -24,7 +25,7 @@ class MapelController extends Controller
      */
     public function create()
     {
-        //
+        return view('component.mapel.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'mapel' => 'required|max:255',
+        ]);
+
+        $mapel = Mapel::create($request->all());
+
+        return redirect('mapel');
     }
 
     /**
@@ -55,9 +62,10 @@ class MapelController extends Controller
      * @param  \App\Models\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mapel $mapel)
+    public function edit($id)
     {
-        //
+        $mapel = Mapel::find($id);
+        return view('component.mapel.edit', compact('mapel'));
     }
 
     /**
@@ -69,7 +77,15 @@ class MapelController extends Controller
      */
     public function update(Request $request, Mapel $mapel)
     {
-        //
+        $validate = $request->validate([
+            'mapel' => 'required'
+        ]);
+
+        $mapel->update([
+            'mapel' => $request->mapel
+        ]);
+
+        return redirect('mapel');
     }
 
     /**

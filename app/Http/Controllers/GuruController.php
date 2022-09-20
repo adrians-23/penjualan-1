@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Mapel;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
@@ -14,7 +15,8 @@ class GuruController extends Controller
      */
     public function index()
     {
-        return view('component.guru.index');
+        $guru = Guru::all();
+        return view('component.guru.index', compact('guru'));
     }
 
     /**
@@ -24,7 +26,8 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        $mapel_id = Mapel::all();
+        return view('component.guru.create', compact('mapel_id'));
     }
 
     /**
@@ -35,7 +38,16 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'nama' => 'required|max:255',
+            'alamat' => 'required',
+            'jenis_kelamin' => 'required',
+            'mapel_id' => 'required',
+        ]);
+
+        $guru = Guru::create($request->all());
+
+        return redirect('guru');
     }
 
     /**
@@ -55,9 +67,11 @@ class GuruController extends Controller
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guru $guru)
+    public function edit($id)
     {
-        //
+        $guru = Guru::find($id);
+        $mapel = Mapel::all();
+        return view('component.guru.edit', compact('guru', 'mapel'));
     }
 
     /**
@@ -69,7 +83,21 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
-        //
+        $validate = $request->validate([
+            'nama' => 'required|max:255',
+            'alamat' => 'required',
+            'jenis_kelamin' => 'required',
+            'mapel_id' => 'required'
+        ]);
+
+        $guru->update([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'mapel_id' => $request->mapel_id
+        ]);
+
+        return redirect('guru');
     }
 
     /**

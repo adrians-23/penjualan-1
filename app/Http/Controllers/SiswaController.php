@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\Kelas;
+use App\Models\Mapel;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -14,7 +16,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('component.siswa.index');
+        $siswa = Siswa::all();
+        return view('component.siswa.index', compact('siswa'));
     }
 
     /**
@@ -24,7 +27,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        $kelas_id = Kelas::all();
+        $mapel_id = Mapel::all();
+        return view('component.siswa.create', compact('kelas_id', 'mapel_id'));
     }
 
     /**
@@ -35,7 +40,17 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'nama' => 'required|max:255',
+            'alamat' => 'required',
+            'jenis_kelamin' => 'required',
+            'kelas_id' => 'required',
+            'mapel_id' => 'required'
+        ]);
+
+        $siswa = Siswa::create($request->all());
+
+        return redirect('siswa');
     }
 
     /**
@@ -55,9 +70,12 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Siswa $siswa)
+    public function edit($id)
     {
-        //
+        $siswa = Siswa::find($id);
+        $kelas = Kelas::all();
+        $mapel = Mapel::all();
+        return view('component.siswa.edit', compact('siswa', 'kelas', 'mapel'));
     }
 
     /**
@@ -69,7 +87,23 @@ class SiswaController extends Controller
      */
     public function update(Request $request, Siswa $siswa)
     {
-        //
+        $validate = $request->validate([
+            'nama' => 'required|max:255',
+            'alamat' => 'required',
+            'jenis_kelamin' => 'required',
+            'kelas_id' => 'required',
+            'mapel_id' => 'required'
+        ]);
+
+        $siswa->update([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'kelas_id' => $request->kelas_id,
+            'mapel_id' => $request->mapel_id
+        ]);
+
+        return redirect('siswa');
     }
 
     /**

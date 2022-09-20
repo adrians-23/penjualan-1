@@ -10,7 +10,7 @@
     <div class="card mt-2">
         <div class="card-body">
             <div class="card-title  ">
-                <a class="btn btn-sm float-end" href="#"><i class="fa fa-plus"></i></a>
+                <a class="btn btn-sm float-end" href="{{ route('kelas.create')}}"><i class="fa fa-plus"></i></a>
                 <h5>Data Kelas</h5>
             </div>
         </div>
@@ -28,16 +28,16 @@
         
         {{-- Data Kelas --}}
                 <tbody class="table-group-divide">
-                    {{-- @foreach () --}}
+                    @foreach ($kelas as $item)
                     <tr>
-                        <th scope="row">1</th>
-                        <td>XII RPL-1</td>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $item->nama_kelas }}</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            <a href="/kelas/edit/{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                            <a href="/kelas/hapus/{{$item->id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>
