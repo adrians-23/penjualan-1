@@ -1,6 +1,9 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-3" style="height: 60px; border-radius: 0px 0px 0px 0px;">
+<nav class="navbar navbar-expand-md navbar-light p-3" style="height: 50px; border-radius: 0px 0px 0px 0px;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">SEKOLAH</a>
+        <a class="navbar-brand" href="/">
+            <i class="fa-solid fa-school"></i>
+            SEKOLAH
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,10 +29,10 @@
             </ul>
 
             {{-- Tombol Search --}}
-            <form class="d-flex" role="search">
+            {{-- <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-secondary" type="submit">Search</button>
-            </form>
+            </form> --}}
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">

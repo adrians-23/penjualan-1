@@ -16,7 +16,7 @@
                     <div class="form-group">
 
                         {{-- Add Nama --}}
-                        <div class="mt-4 mb-4">
+                        <div class=" mb-3">
                             <label class="mb-2" for="nama">Nama</label>
                             <input type="text" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
                             @error('nama')
@@ -27,7 +27,7 @@
                         </div>
                         
                         {{-- Add Alamat --}}
-                        <div class="mt-4 mb-4">
+                        <div class="mt-3 mb-3">
                             <label class="mb-2" for="floatingTextarea">Alamat</label>
                             <textarea class="form-control @error('alamat') is-invalid @enderror"  id="floatingTextarea" name="alamat" placeholder="Alamat"></textarea>
                             @error('alamat')
@@ -38,7 +38,7 @@
                         </div>
                         
                         {{-- Add Jenis Kelamin --}}
-                        <div class="mt-4 mb-4">
+                        <div class="mt-3 mb-3">
                             <label class="mb-2" for="nama">Jenis Kelamin</label>
                             <br>
                             <div class="form-check form-check-inline">
@@ -57,12 +57,12 @@
                         </div>
 
                         {{-- Add Kelas ID --}}
-                        <div class="mt-4 mb-4">
+                        <div class="mt-3 mb-3">
                             <label class="mb-2" for="nama">Kelas ID</label>
                             <select name="kelas_id" id="kelas_id" value="{{ old('kelas_id')}}" class="form-control @error('kelas_id') is-invalid @enderror">
                                 <option selected>Pilih...</option>
                                 @foreach($kelas_id as $kid)
-                                    <option value="{{$kid->id}}">{{$kid->kelas}}</option>
+                                    <option value="{{$kid->id}}">{{$kid->nama_kelas}}</option>
                                 @endforeach
                             </select>
                             @error('kelas_id')
@@ -73,7 +73,7 @@
                         </div>
 
                         {{-- Add Mapel ID --}}
-                        <div class="mt-4 mb-4">
+                        <div class="mt-3 mb-3">
                             <label class="mb-2" for="nama">Mapel ID</label>
                             <select name="mapel_id" id="mapel_id" value="{{ old('mapel_id')}}" class="form-control @error('mapel_id') is-invalid @enderror">
                                 <option selected>Pilih...</option>

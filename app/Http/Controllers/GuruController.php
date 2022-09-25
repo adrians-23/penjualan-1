@@ -13,9 +13,14 @@ class GuruController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $guru = Guru::all();
+        // search functionality
+        if($request->has('search')){
+            $guru = Guru::where('nama', 'LIKE', '%' .$request->search.'%')->get();
+        }else {
+            $guru = Guru::paginate(5);
+        }
         return view('component.guru.index', compact('guru'));
     }
 
@@ -106,8 +111,11 @@ class GuruController extends Controller
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guru $guru)
+    public function destroy($id)
     {
-        //
+        $guru = Guru::find($id);
+        $guru->delete();
+
+        return redirect('guru');
     }
 }

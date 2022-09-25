@@ -12,10 +12,16 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kelas = Kelas::all();
-        return view('component.kelas.index', compact('kelas'));
+        // search functionality
+        if($request->has('search')) {
+            $kelas = Kelas::where('nama_kelas', 'LIKE', '%' .$request->search.'%')->get();
+        }else {
+            $kelas = Kelas::paginate(5);
+        }
+        
+        return view('component.kelas.index', compact('kelas', 'request'));
     }
 
     /**

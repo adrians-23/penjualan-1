@@ -6,12 +6,17 @@
 
 @section('content')
 <section class="section">
-    <h2 class="my-4">Data Kelas</h2>
+    <h5 class="mt-2 mb-4">Data Kelas</h5>
     <div class="card mt-2">
         <div class="card-body">
             <div class="card-title  ">
-                <a class="btn btn-sm float-end" href="{{ route('kelas.create')}}"><i class="fa fa-plus"></i></a>
                 <h5>Data Kelas</h5>
+                <hr>
+                <a class="btn btn-sm btn-primary float-end" href="{{ route('kelas.create')}}"><i class="fa fa-plus"></i></a>
+                <form action="/kelas" class="d-flex" role="search" method="GET">
+                    <input class="form-control" type="search" name="search" placeholder="Cari Kelas" aria-label="Search" style="width: 200px;">
+                    <button class="btn btn-outline-secondary mx-1" type="submit">Cari</button>
+                </form>
             </div>
         </div>
     
@@ -28,9 +33,9 @@
         
         {{-- Data Kelas --}}
                 <tbody class="table-group-divide">
-                    @foreach ($kelas as $item)
+                    @foreach ($kelas as $key => $item)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
+                        <th scope="row">{{ $kelas -> firstItem() + $key  }}</th>
                         <td>{{ $item->nama_kelas }}</td>
                         <td>
                             <a href="/kelas/edit/{{$item->id}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
@@ -40,6 +45,11 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="container" style="width: 100%; bottom: 0px;">
+                {{ $kelas->links() }}
+            </div>
+            
         </div>
     </div>
 </section>

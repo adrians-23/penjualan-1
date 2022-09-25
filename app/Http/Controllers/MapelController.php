@@ -12,9 +12,14 @@ class MapelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $mapel = Mapel::all();
+        // search functionality
+        if($request->has('search')) {
+            $mapel = Mapel::where('mapel', 'LIKE', '%' .$request->search.'%')->get();
+        }else {
+            $mapel = Mapel::paginate(5);
+        }
         return view('component.mapel.index', compact('mapel'));
     }
 
@@ -94,8 +99,11 @@ class MapelController extends Controller
      * @param  \App\Models\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mapel $mapel)
+    public function destroy($id)
     {
-        //
+        $mapel = Mapel::find($id);
+        $mapel->delete();
+
+        return redirect('mapel');
     }
 }

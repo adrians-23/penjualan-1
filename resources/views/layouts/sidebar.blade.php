@@ -3,8 +3,12 @@
         <div class="collapse navbar-collapse">
             <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between p-1">
 
+                <li class="nav-item h1">
+                    <a class="nav-link font-monospace fw-semibold pl-0" href="/">SEKOLAH</a>
+                </li>
+
                 <li class="nav-item">
-                    <a class="nav-link pl-0 text-nowrap active" href="/"> <span class="font-weight-bold"><i class="fa-solid fa-gauge-simple mx-1"></i>Dashboard</span></a>
+                    <a class="nav-link pl-0" href="/"> <span class="d-none d-md-inline"><i class="fa-solid fa-gauge-simple mx-1"></i>Dashboard</span></a>
                 </li>
 
                 <li class="nav-item">

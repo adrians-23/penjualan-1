@@ -32,13 +32,13 @@
         <div class="container-fluid">
             <div class="row flex-column flex-md-row">
                 {{-- navbar --}}
-                @include('layouts.navbar')
                 @include('layouts.sidebar')
-
+                
                 {{-- content --}}
                 <main class="col bg-faded py-3 flex-grow-1">
+                    @include('layouts.navbar')
                     @yield('content')
-                    @include('layouts.footer')
+                    {{-- @include('layouts.footer') --}}
                 </main>  
             </div>
         </div>

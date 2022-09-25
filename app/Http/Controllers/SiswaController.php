@@ -14,9 +14,14 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $siswa = Siswa::all();
+        // search functionality
+        if($request->has('search')){
+            $siswa = Siswa::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(5);
+        }else {
+            $siswa = Siswa::paginate(5);
+        }
         return view('component.siswa.index', compact('siswa'));
     }
 
@@ -112,8 +117,11 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Siswa $siswa)
+    public function destroy($id)
     {
-        //
+        $siswa = Siswa::find($id);
+        $siswa->delete();
+
+        return redirect('siswa');
     }
 }
