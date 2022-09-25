@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    / Tabel Kelas
+@endsection
+
 @section('title')
     Data Kelas
 @endsection
